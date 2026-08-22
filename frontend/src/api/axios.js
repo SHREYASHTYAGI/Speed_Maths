@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_URL || 'https://speed-maths-z241.onrender.com',
   withCredentials: true,
 })
 
@@ -25,7 +25,7 @@ api.interceptors.response.use(
 
       try {
         const refreshResponse = await axios.post(
-          `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/auth/refresh`,
+          `${import.meta.env.VITE_API_URL || 'https://speed-maths-z241.onrender.com'}/auth/refresh`,
           {},
           { withCredentials: true }
         )
