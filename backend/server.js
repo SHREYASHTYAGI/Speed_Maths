@@ -7,8 +7,10 @@ const connectDB = require("./src/db/db");
 
 const PORT = process.env.PORT || 8000;
 
-connectDB()
- 
-app.listen(PORT,()=>{
-    console.log("Server is Live")
-})
+app.listen(PORT, () => {
+    console.log(`Server is Live on port ${PORT}`);
+});
+
+connectDB().catch((error) => {
+    console.error("Database connection failed:", error.message);
+});
