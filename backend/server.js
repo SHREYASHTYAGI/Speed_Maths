@@ -2,15 +2,21 @@ require("dotenv").config();
 
 const app = require("./src/app");
 const dns=require('dns');
-dns.setServers(['1.1.1.1'],['8.8.8.8'])
+dns.setServers(['1.1.1.1', '8.8.8.8']);
 const connectDB = require("./src/db/db");
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => {
-    console.log(`Server is Live on port ${PORT}`);
-});
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, () => {
+            console.log(`Server is Live on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error("Database connection failed:", error.message);
+        process.exitCode = 1;
+    }
+};
 
-connectDB().catch((error) => {
-    console.error("Database connection failed:", error.message);
-});
+startServer();
